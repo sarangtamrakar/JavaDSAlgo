@@ -381,6 +381,7 @@ class TripletSum{
     }
 }
 
+
 class MedianOfTwoSortedArray{
     static double fun1(int[] a1,int[] a2){
         int n1 = a1.length;
@@ -963,6 +964,52 @@ class Solution5 {
         }
         return max;
     }
+}
+
+
+
+
+class CountPairWithGivenSum{
+    static  int NaiveApproach(int[] arr, int givenSum){
+        int res = 0;
+        // simply run two loops
+        for(int i = 0 ; i<arr.length; i++){
+            for(int j=i+1;j<arr.length;j++){
+                if(arr[i]+arr[j]==givenSum){
+                    res++;
+                }
+            }
+        }
+        return res;
+    }
+
+    static int OptmisedSolution(int[] arr, int givenSum, int l , int h){
+        int L = l;
+        int H = h;
+        int res = 0;
+        while(L<H){
+            int mid = (L+H)/2;
+
+            if(arr[L]+arr[H]==givenSum){
+                res++;
+            }else if(arr[L]+arr[H]>givenSum){
+                H--;
+            }else{
+                L++;
+            }
+        }
+
+        return res;
+    }
+}
+
+
+
+class CountTripletWithGivenSum{
+    // Naive approach is simply run 3 loops ,if find triplet so increase the res & return res at the end of all 3 loop completion;
+
+    
+
 }
 
 

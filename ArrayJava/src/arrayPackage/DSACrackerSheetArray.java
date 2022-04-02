@@ -719,8 +719,6 @@ class BestTimeToBuySellStocksSecond{
 }
 
 
-
-
 class MinimumNumbersOfJumpsToReachEndOfAnArray {
     public static boolean canJump(int[] nums) {
 
@@ -764,8 +762,7 @@ class MinimumNumbersOfJumpsToReachEndOfAnArray {
 
 
 
-class IntersectionOfThreeSortedArrayWithRepeatElement
-{
+class IntersectionOfThreeSortedArrayWithRepeatElement {
     ArrayList<Integer> commonElements(int A[], int B[], int C[], int n1, int n2, int n3)
     {
         // code here
@@ -826,9 +823,6 @@ class IntersectionOfThreeSortedArrayWithRepeatElement
 
 
 
-
-
-
 public class DSACrackerSheetArray {
     public static void main(String[] args){
         int[] arr1 = {1, 3, 5, 9, 6, 2, 6, 7, 6, 8, 9};
@@ -836,4 +830,6 @@ public class DSACrackerSheetArray {
         System.out.println(res);
     }
 }
+
+
 

@@ -6,88 +6,73 @@ import java.util.Arrays;
 public class rough {
     public static void main(String[] args) {
         // find the square root
-        int[] arr1 = {1,0,1,1,1};
-        int res = fun1(arr1,0);
+        int[] arr1 = {1,3,5,6,7,8,9};
+        boolean res = ProblemClass.find4sumOptimised(arr1,34);
         System.out.println(res);
     }
 
-    static int fun1(int[] arr1 ,int x){
-        int n = arr1.length;
-        if(n==1){
-            if(arr1[0]==x){
-                return 0;
-            }else return -1;
-        }
 
-        int l = 0;int h = n-1;
-        while(l<=h){
-            int mid = (l+(h-l)/2);
-            if(arr1[mid]==x){
-                return mid;
-            }
-            // check left half is sorted or not
-            else if(arr1[mid]>=arr1[l]){
-                // check whether x lies in this range or not;
-                if(x>=arr1[l] && x<arr1[mid]){
-                    h = mid-1;
-                }else{
-                    l = mid+1;
-                }
-            }else{
-                if(x>arr1[mid] && x<=arr1[h]){
-                    l = mid+1;
-                }else{
-                    h = mid-1;
-                }
-            }
-        }
-        return -1;
-
-    }
 }
 
 
 
+class ProblemClass{
+    static boolean fun3(int[] arr, int givenSum){
 
-class Solution7 {
-    public boolean search(int[] nums, int target) {
-
-        int n = nums.length;
-        if(n==1){
-            if(nums[0]==target){
-                return true;
-            }else{
-                return false;
-            }
-        }
-
-        int l = 0;
-        int h = n-1;
-        while(l<=h) {
-            int mid = (l + h) / 2;
-
-            // most Imp case to Handle non distinct elements...
-            if(nums[mid]==nums[l] && nums[mid]==nums[h]){
-                l++;
-            }
-
-            if (nums[mid] == target) {
-                return true;
-            }
-            if (nums[mid] >= nums[l]) {  // this equal is very IMP [3,1] find 1 test case
-                if (target < nums[mid] && target >= nums[l]) {
-                    h = mid - 1;
-                } else {
-                    l = mid + 1;
-                }
-            } else {
-                if (target>nums[mid] && target <= nums[h]) {
-                    l = mid + 1;
-                } else {
-                    h = mid - 1;
+        // find pair with given sum
+        for(int i = 0; i<arr.length;i++){
+            for(int j = i+1; j<arr.length;j++){
+                if(arr[i]+arr[j]==givenSum){
+                    return true;
                 }
             }
         }
         return false;
     }
+
+
+    static boolean findPairOptimised(int[] arr, int givenSum,int l,int h){
+        int n = arr.length;
+        while(l<h){
+            int mid = (l+h)/2;
+            if(arr[l]+arr[h]==givenSum){
+                return true;
+            }else if(arr[l]+arr[h]>givenSum){
+                h--;
+            }else{
+                l++;
+            }
+        }
+        return false;
+    }
+
+
+    static boolean findTripletOptimised(int[] arr, int givenSum,int l,int h){
+        // O(N^2) solution
+        int n = arr.length;
+        for(int i =0 ; i<arr.length;i++){
+            if(findPairOptimised(arr,givenSum-arr[i],i+1,n-1)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static boolean find4sumOptimised(int[] arr, int givenSum){
+        int l = 0; int h = arr.length-1;
+
+        for(int i = 0 ; i<arr.length; i++){
+            if(findTripletOptimised(arr,givenSum-arr[i],i+1,h)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
+
+
+
+
+
+

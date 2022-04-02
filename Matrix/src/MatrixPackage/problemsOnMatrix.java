@@ -4,6 +4,8 @@ package MatrixPackage;
 
 // Basic Questions of Matrix
 
+import java.util.Arrays;
+
 class PrintMatrixInSnakePattern{
     static void fun1(int[][] mat){
 
@@ -277,11 +279,179 @@ class ReverseTheRows{
 }
 
 
+// Revise it again
+class PrintSpiralMatrix{
+    static void fun1(int[][] arr){
+        int rows = arr.length;
+        int cols = arr[0].length;
+
+        int l=0; int r=cols-1; int t=0; int b=rows-1;
+
+        while(l<=r && t<=b){
+            int i ; int j;
+            // print top row
+
+            for(i=l;i<=r;i++){
+                System.out.print(arr[t][i]);
+            }
+            t++;
+
+            // print right column
+
+            for (j = t; j <= b; j++) {
+                System.out.print(arr[j][r]);
+            }
+
+            r--;
+
+            // print last row;
+            if(l<=r) {
+                for (i = r; i >= l; i--) {
+                    System.out.print(arr[b][i]);
+                }
+                b--;
+            }
+
+
+
+            // print first column
+            if(t<=b) {
+                for (j = b; j >=t; j--) {
+                    System.out.print(arr[j][l]);
+                }
+                l++;
+            }
+
+        }
+    }
+}
+
+
+class SearchInRowWiseAndColumnWiseSortedArray{
+
+    // Naive Approach simple iterate through each elements of matrix
+    // O(r*c) solution
+    static boolean fun1(int[][] arr, int k){
+        int r = arr.length;
+        int c = arr[0].length;
+
+        for(int i = 0;i<r;i++){
+            for(int j = 0 ; j<c;j++){
+                if(k==arr[i][j]){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // optimised approach
+    // In This approach we will  start searching with (0,c-1) & after that we will
+    // if element to be search is less than we will go left (c--) otherwise we will go down (r++);
+    static void fun2(int[][] arr, int k){
+        int r = arr.length;
+        int c = arr[0].length;
+        int i = 0; int j = c-1;
+        while(i<r && j>=0){
+            if(k==arr[i][j]){
+                System.out.println(i);
+                System.out.println(j);
+                break;
+            }else if(k<arr[i][j]){
+                j--;
+            }else{
+                i++;
+            }
+        }
+        System.out.println("Not Found");
+    }
+}
+
+
+
+class MedianOfRowWiseSortedArray{
+    // Naive solution
+    // 1. First copy all matrix elements in array & sort the array & then return middle elements
+    // r*cLog(r*c) time & r*c aux space
+
+    // efficient Solution use binary search
+    // find min & max in array ==> min  find in (all rows , 0 column)  ===> max find in (all rows,c-1 column)
+    static int fun2(int[][] arr){
+
+        int rows = arr.length;
+        int cols = arr[0].length;
+        // first find min & max
+        int Min = Integer.MAX_VALUE; int Max = Integer.MIN_VALUE;
+        for(int i=0;i<rows;i++){
+            Max = Math.max(Max,arr[i][cols-1]);
+            Min = Math.min(Min,arr[i][0]);
+        }
+
+        int medianIdx = (rows*cols+1)/2;
+
+        while(Min<=Max){
+            int mid = (Min+Max)/2;
+
+            // count how many elements are less or equal to mid (find index of mid)
+            int midIdx = 0;
+            for(int i = 0 ; i<rows;i++){
+                midIdx += Math.abs(Arrays.binarySearch(arr[i],mid)+1);
+            }
+
+            if(midIdx==medianIdx){
+                return mid;
+            }
+            else if(midIdx>medianIdx){
+                Max = mid-1;
+            }else{
+                Min = mid+1;
+            }
+        }
+        return -1;
+    }
+
+
+
+
+    static int fun3(int[][] arr){
+
+        int rows = arr.length;
+        int cols = arr[0].length;
+        // first find min & max
+        int Min = Integer.MAX_VALUE; int Max = Integer.MIN_VALUE;
+        for(int i=0;i<rows;i++){
+            Max = Math.max(Max,arr[i][cols-1]);
+            Min = Math.min(Min,arr[i][0]);
+        }
+
+        int medianIdx = (rows*cols+1)/2;
+
+        while(Min<Max){
+            int mid = (Min+Max)/2;
+
+            // count how many elements are less or equal to mid (find index of mid)
+            int midIdx = 0;
+            for(int i = 0 ; i<rows;i++){
+                midIdx += Math.abs(Arrays.binarySearch(arr[i],mid)+1);
+            }
+
+
+            if(midIdx<medianIdx){
+                Min = mid+1;
+            }else{
+                Max = mid;
+            }
+        }
+        return Max;
+    }
+}
 
 
 public class problemsOnMatrix {
     public static void main(String[] args){
-        int[][] mat = {{1,2,3},{4,5,6}};
-        ReverseTheRows.fun1(mat);
+        int[][] mat = {{1,2},{1,7}};
+
+        int res = MedianOfRowWiseSortedArray.fun3(mat);
+        System.out.println(res);
     }
 }

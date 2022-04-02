@@ -3,8 +3,8 @@ package arrayPackage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
-
+import java.util.Collections;
+import java.util.HashMap;
 
 
 class SearchingInArray{
@@ -1056,16 +1056,286 @@ class MaximumOccuringElementInRanges{
 
 
 
+class MeanOfArray{
+    static int fun1(int[] arr){
+        int sum = 0;
+        for(int i = 0; i<arr.length; i++){
+            sum+=arr[i];
+        }
+        return sum/arr.length;
+    }
+}
 
 
+class MedianOfArray{
+    static int fun1(int[] arr){
+        Arrays.sort(arr);
+        if(arr.length%2==0){
+            int idx1 = arr.length/2;
+            int idx2 = (arr.length/2)-1;
+            return (arr[idx1]+arr[idx2])/2;
+        }else{
+            int idx3 = arr.length/2;
+            return arr[idx3];
+        }
+    }
+}
+
+
+class ReverseArrayInGroupOfSizeK{
+    static void fun1(int[] arr,int k){
+        int n = arr.length;
+        for(int i = 0; i<arr.length;i= i+k){
+            int left = i; int right = Math.min(i+k-1,n-1);
+
+            while(left<right){
+                int tempVar = arr[left];
+                arr[left] = arr[right];
+                arr[right] = tempVar;
+                left++;
+                right--;
+            }
+        }
+
+        for(int e:arr){
+            System.out.println(e);
+        }
+
+    }
+}
+
+
+
+class MinimumAdjacentDifferenceInACircularArray{
+    static void fun1(int[] arr){
+        int n = arr.length;
+        int min = Integer.MAX_VALUE;
+        for(int i = 0; i<arr.length-1;i++){
+
+            int diff = Math.abs((arr[i]-arr[i+1]));
+            min = Math.min(min,diff);
+        }
+
+        // just find diff between last & first index...
+        int dif = Math.abs(arr[n-1]-arr[0]);
+        min = Math.min(min,dif);
+        System.out.println(min);
+    }
+}
+
+
+
+class MaximumOccuredInteger{
+    static int NaiveMethod(int[] arr1, int[] arr2){
+        // we will iterate through all the ranges & maitaining elements frequency in hashmap
+        HashMap<Integer,Integer> hmap = new HashMap<Integer,Integer>();
+        int n = arr1.length;
+
+        for(int i = 0; i<n;i++){
+            for(int j = arr1[i];j<=arr2[i];j++){
+
+                if(hmap.containsKey(j)){
+                    hmap.put(j,hmap.get(j)+1);
+                }else{
+                    hmap.put(j,1);
+                }
+            }
+        }
+        // find max value in hash map
+        int maxValues = Collections.max(hmap.values());
+        for(int e: hmap.keySet()){
+            if(hmap.get(e)==maxValues){
+                return e;
+            }
+        }
+        return -1;
+    }
+
+    static int OptimisedSolution(int[] arr1, int[] arr2){
+        int[] temp  = new int[1000000];
+        // now mark the starting & ending point of ranges int temp arr
+        for(int i = 0;i<arr1.length;i++){
+            temp[arr1[i]]+=1;
+            temp[arr2[i]+1]-=1;
+        }
+
+        // now find prefix sum arr;
+        int curr = 0;
+        for(int j = 0; j<temp.length;j++){
+            curr+=temp[j];
+            temp[j] = curr;
+        }
+
+        int res = 0;
+        int maxelement = Integer.MIN_VALUE;
+        for(int k = 0; k<temp.length;k++){
+
+            if(temp[k]>maxelement){
+                maxelement = temp[k];
+                res = k;
+            }
+        }
+        System.out.println(res);
+        return res;
+    }
+}
+
+
+
+class ConvertToWaveArray{
+    static int[] NaiveMethod(int[] arr){
+
+        for(int i = 1; i<arr.length;i = i+2){
+            int temp = arr[i];
+            arr[i] = arr[i-1];
+            arr[i-1] = temp;
+        }
+        return arr;
+    }
+
+    // also solve it for unsorted arr with Optimised approach
+}
+
+
+
+class FrequenciesOfLimitedRangeArrayElements{
+    // Given an array A[] of N positive integers which can contain integers from 1 to P where elements can be repeated or
+    // can be absent from the array.
+    // Your task is to count the frequency of all elements from 1 to N.
+    // Note: The elements greater than N in the array can be ignored for counting.
+
+
+    static void NaiveMethod(int[] arr , int p , int N){
+
+        // O(N*n) solution
+        for(int i = 1;i<=N;i++){
+            int count = 0;
+            for(int j = 0;j<arr.length;j++){
+                if(arr[j]==i && arr[j]<=N){
+                    count++;
+                }
+            }
+            System.out.println(i+" "+count);
+        }
+    }
+
+    static void OptimisedSolution1(int[] arr, int N){
+        // O(N) solution && O(N) space complexity
+
+        int[] temp = new int[N];
+        for(int i = 0; i<arr.length;i++){
+            temp[arr[i]-1]++;
+        }
+
+        // print temp arr elements & Their frequency
+        for(int j =0 ; j<temp.length;j++){
+            int element = j+1;
+            System.out.println(element +" "+temp[j]);
+        }
+    }
+}
+
+
+
+
+class SmallestPositiveMissingNumber{
+    // Very IMP Question
+    // solve it in O(N) time & O(1) space
+
+    static int NaiveMethod(int[] arr){
+        // O(1000000 * N) solution (Quadratic solution)
+        int i;
+        for(i = 1; i<1000000;i++){
+            boolean isPresent = false;
+            for(int j = 0; j<arr.length;j++){
+                if(i==arr[j]){
+                    isPresent = true;
+                    break;
+                }
+            }
+            if(!isPresent){
+                return i;
+            }
+        }
+        return i;
+    }
+
+    static int Optimised1(int[] arr){
+        // it is O(NLogN) solution
+        Arrays.sort(arr);
+        int variable = 1;
+        for(int idx = 0; idx<arr.length;idx++){
+            if(arr[idx]>0){
+                if(arr[idx]==variable){
+                    variable++;
+                }else{
+                    return variable;
+                }
+            }
+        }
+        return variable;
+    }
+
+    static int optimised2(int[] arr){
+        // O(1000000) space & o(1000000) time...
+        // counter  arr method
+        // we will create temp arr of size 10^6
+        int[] temparr = new int[1000000];
+
+        for(int i = 0; i<arr.length; i++){
+            int val = arr[i];
+            if(arr[i]>0){
+                temparr[arr[i]-1]++;
+            }
+        }
+
+        int j;
+        for(j = 0; j<temparr.length; j++){
+            if(temparr[j]==0){
+                return j+1;
+            }
+        }
+        return j;
+    }
+}
+
+
+class RearrangeArrayAlternatively{
+    static int[] NaiveSolution(int[] arr){
+        int n = arr.length;
+        int[] res = new int[arr.length];
+
+        int i = n-1; int j = 0;
+        while((i>=0) && (j<res.length)){
+            res[j] = arr[i];
+            j = j+2;
+            i--;
+        }
+
+        i = 0; j = 1;
+        while((i<arr.length) && (j<res.length)){
+            res[j] = arr[i];
+            i++;
+            j = j + 2;
+        }
+
+        return res;
+
+    }
+}
 
 
 public class arrayproblems {
     public static void main(String[] args) {
-        int[] Larr = {3,4,2,1};
-        int[] Rarr = {6,6,8};
-        EquilibriumPoint.fun3(Larr);
+
+        int[] arr1 = {10,20,30,40,50,60,70,80,90,100,110};
+        int[] res = RearrangeArrayAlternatively.NaiveSolution(arr1);
+        System.out.print(Arrays.toString(res));
+
+
+
     }
+
 }
 
 
