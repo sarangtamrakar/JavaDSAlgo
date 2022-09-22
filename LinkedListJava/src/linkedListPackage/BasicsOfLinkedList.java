@@ -15,7 +15,7 @@ class Node{
 }
 
 
-class IterateLinkedListLoop{
+class A1IterateLinkedListLoop{
     static void fun1(Node head){
         Node curr = head;
         while(curr!=null){
@@ -35,7 +35,7 @@ class IterateLinkedListLoop{
 }
 
 
-class SearchElementInLinkedList{
+class A2SearchElementInLinkedList{
     static boolean fun1(Node head, int x){
         Node curr = head;
         while(curr!=null){
@@ -59,7 +59,7 @@ class SearchElementInLinkedList{
 }
 
 
-class InsertAtBeginingOfLinkedList{
+class A3InsertAtBeginingOfLinkedList{
     static Node fun1(Node head, int x){
 
         Node newNode = new Node(x);
@@ -67,14 +67,14 @@ class InsertAtBeginingOfLinkedList{
         newNode.next = head;
 
         // print updated Linked List
-        IterateLinkedListLoop.fun2(newNode);
+        A1IterateLinkedListLoop.fun2(newNode);
 
         return newNode;
     }
 }
 
 
-class InsertAtLastOfLinkedList{
+class A4InsertAtLastOfLinkedList{
     static Node fun1(Node head, int x){
 
          Node temp = new Node(x);
@@ -97,7 +97,7 @@ class InsertAtLastOfLinkedList{
 
 
 
-class DeleteTheFirstNodeInLinkedList{
+class A5DeleteTheFirstNodeInLinkedList{
     static Node fun1(Node head){
         if(head==null){
             return null;
@@ -107,7 +107,7 @@ class DeleteTheFirstNodeInLinkedList{
 }
 
 
-class DeleteTheLastNodeInLinkedList{
+class A6DeleteTheLastNodeInLinkedList{
     static Node fun1(Node head){
         if(head==null){
             return null;
@@ -131,12 +131,12 @@ class DeleteTheLastNodeInLinkedList{
 
 
 
-class DeleteTheithNodeInLinkedList{
+class A7DeleteTheithNodeInLinkedList{
     // Very Good Question Solve it again
     static Node fun1(Node head, int pos){
         // edge case
         if(pos==1) {
-            return DeleteTheFirstNodeInLinkedList.fun1(head);
+            return A5DeleteTheFirstNodeInLinkedList.fun1(head);
         }
 
         Node curr = head;
@@ -158,7 +158,7 @@ class DeleteTheithNodeInLinkedList{
 
 
 
-class InsertAtPositionIndex{
+class A8InsertAtPositionIndex{
     static Node fun1(Node head,int pos , int x){
         Node NodeToInsert = new Node(x);
 
@@ -188,7 +188,7 @@ class InsertAtPositionIndex{
 
 
 
-class DeleteNodeATithPositionIndex{
+class A9DeleteNodeATithPositionIndex{
     static Node fun1(Node head,int pos){
 
         // Very Good Question solved it again
@@ -242,7 +242,7 @@ class DoubleNode{
 
 
 
-class TraversalOfDLL{
+class A11TraversalOfDLL{
     static void fun1(DoubleNode head){
         if(head==null){
             return;
@@ -254,7 +254,7 @@ class TraversalOfDLL{
 }
 
 
-class InsertAtBeginingOfDLL{
+class A12InsertAtBeginingOfDLL{
     static DoubleNode fun1(DoubleNode head, int x){
         DoubleNode temp = new DoubleNode(x);
         // Handle edge cases....
@@ -270,7 +270,7 @@ class InsertAtBeginingOfDLL{
 }
 
 
-class InsertAtIthPositionOfDLL{
+class A13InsertAtIthPositionOfDLL{
     static DoubleNode fun1(DoubleNode head, int x,int pos){
         // create temp node
         DoubleNode temp = new DoubleNode(x);
@@ -279,7 +279,7 @@ class InsertAtIthPositionOfDLL{
         if(pos == 1 && head==null){
             return temp;
         }else if(pos==1 && head!=null){
-            return InsertAtBeginingOfDLL.fun1(head,x);
+            return A12InsertAtBeginingOfDLL.fun1(head,x);
         }
 
         if(head==null){
@@ -310,7 +310,7 @@ class InsertAtIthPositionOfDLL{
 
 
 
-class InsertAtLastOfDLL{
+class A14InsertAtLastOfDLL{
     static DoubleNode fun1(DoubleNode head,int x){
 
         DoubleNode newNode = new DoubleNode(x);
@@ -332,7 +332,7 @@ class InsertAtLastOfDLL{
 
 
 // Very Imp question
-class ReverseTheDLL{
+class A15ReverseTheDLL{
     static DoubleNode fun1(DoubleNode head){
 
         if(head==null || head.next==null){
@@ -380,13 +380,7 @@ class ReverseTheDLL{
 
 
 
-
-
-
-
-
-
-class DeleteTheFirstNodeInDLL{
+class A16DeleteTheFirstNodeInDLL{
     static DoubleNode fun1(DoubleNode head){
         // Handle edge cases
 
@@ -403,7 +397,7 @@ class DeleteTheFirstNodeInDLL{
     }
 }
 
-class DeleteTheLastNodeinDLL{
+class A17DeleteTheLastNodeinDLL{
     static DoubleNode fun1(DoubleNode head){
 
         if(head==null){
@@ -438,7 +432,7 @@ class SCNode{
 
 
 
-class IterateSCLL{
+class A18IterateSCLL{
     static void fun1(SCNode head){
         if(head==null){
             return;
@@ -467,7 +461,7 @@ class IterateSCLL{
 
 
 
-class InsertAtBeginingOfSCLL{
+class A19InsertAtBeginingOfSCLL{
     // ******* Very IMP
 
     // O(N) Solution
@@ -512,7 +506,7 @@ class InsertAtBeginingOfSCLL{
 }
 
 
-class InsertATEndOfSCLL{
+class A20InsertATEndOfSCLL{
 
     // O(N) solution
     static SCNode Naive(SCNode head, int x){
@@ -553,7 +547,7 @@ class InsertATEndOfSCLL{
 
 
 
-class DeleteheadOfTheSCLL{
+class A21DeleteheadOfTheSCLL{
 
     // O(N) solution
     static SCNode NaiveApproach(SCNode head){
@@ -593,14 +587,14 @@ class DeleteheadOfTheSCLL{
 }
 
 
-class DeleteKthNodeInSCLL{
+class A22DeleteKthNodeInSCLL{
     static SCNode fun1(SCNode head, int x){
         if(head==null){
             return null;
         }
 
         if(x==1){
-            return DeleteheadOfTheSCLL.Optimised(head);
+            return A21DeleteheadOfTheSCLL.Optimised(head);
         }
 
         if(head.next == head){
@@ -621,7 +615,7 @@ class DeleteKthNodeInSCLL{
 }
 
 
-class SortedInsertInLinkedList{
+class A23SortedInsertInLinkedList{
     static Node fun1(Node head, int x){
 
         Node temp = new Node(x);
@@ -657,7 +651,7 @@ class SortedInsertInLinkedList{
 
 
 // IMP question
-class MiddleOfLinkedList{
+class A24MiddleOfLinkedList{
     static void NaiveApproach(Node head){
         // first count number of nodes
         int count = 0;
@@ -691,7 +685,7 @@ class MiddleOfLinkedList{
 
 
 
-class GetNthNodeFromBackInLinkedList{
+class A25GetNthNodeFromBackInLinkedList{
     static void NaiveApproach(Node head, int n){
         // first count the Node in Linked List
         if(n<1){
@@ -729,7 +723,6 @@ class GetNthNodeFromBackInLinkedList{
         }
 
         Node slow = head;
-
         while(fast!=null){
             fast = fast.next;
             slow = slow.next;
@@ -742,7 +735,7 @@ class GetNthNodeFromBackInLinkedList{
 
 
 
-class ReverseTheLinkedListIteratively{
+class A26ReverseTheLinkedListIteratively{
 
     // Using extra arr to store the element
     static Node NaiveApproach(Node head){
@@ -792,7 +785,7 @@ class ReverseTheLinkedListIteratively{
 
 
 
-class RemoveDuplicatesFromSortedSLL{
+class A27RemoveDuplicatesFromSortedSLL{
     // Good question solve it again
     static Node fun1(Node head){
 
@@ -816,7 +809,7 @@ class RemoveDuplicatesFromSortedSLL{
 
 
 
-class ReverseTheLinkedListInSizeK{
+class A28ReverseTheLinkedListInSizeK{
     // Do it again
     static Node recursivelyReverse(Node head, int k){
 
@@ -889,7 +882,7 @@ class ReverseTheLinkedListInSizeK{
 
 
 
-class DetectLoops{
+class A29DetectLoops{
 
     // O(N2) Solution
     static boolean fun1(Node head){
@@ -933,7 +926,7 @@ class DetectLoops{
 
 
 // Detect loop using floyd cycle detection
-class DetectLoopsOptmisedWay{
+class A30DetectLoopsOptmisedWay{
     static boolean fun1(Node head){
         // O(N) solution && O(1) extra space best solution
         // slow pointer :- will move 1 step && fast pointer will move two step , & when they meet it means they is loop
@@ -957,7 +950,7 @@ class DetectLoopsOptmisedWay{
 
 
 // detect && remove the Loop
-class detectAndRemoveLoop{
+class A31detectAndRemoveLoop{
     // o(N) time && O(N) extra space
     static Node fun1(Node head){
         HashSet<Node> hset = new HashSet<Node>();
@@ -1030,8 +1023,9 @@ public class BasicsOfLinkedList {
         head5.next = head3;
 
 
-        Node res = detectAndRemoveLoop.OptimisedSolution(head1);
-        IterateLinkedListLoop.fun1(res);
+        Node res = A31detectAndRemoveLoop.OptimisedSolution(head1);
+        A1IterateLinkedListLoop.fun1(res);
+
 
     }
 }
